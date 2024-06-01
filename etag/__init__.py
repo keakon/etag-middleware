@@ -93,7 +93,7 @@ class ETagResponder:
         await self.send(message)
 
     def handle_etag(self, body: bytes, message: Message) -> None:
-        etag = f'"{b64encode(md5(body).digest())[:-2].decode('ascii')}"'  # remove trailing '=='
+        etag = f'''"{b64encode(md5(body).digest())[:-2].decode('ascii')}"'''  # remove trailing '=='
         assert self.headers is not None
         self.headers['ETag'] = etag
         if_none_match = Headers(scope=self.scope).get('if-none-match')
