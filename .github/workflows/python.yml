@@ -27,7 +27,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pytest pytest-cov
+        pip install starlette fastapi pytest pytest-cov
     - name: Test with coverage
       if: ${{ matrix.python-version == '3.12' }}
       run: pytest --cov --cov-config=.coveragerc tests
@@ -59,7 +59,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pytest
+        pip install starlette fastapi pytest
     - name: Test without coverage
       run: pytest tests
 
@@ -81,6 +81,6 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pytest
+        pip install starlette fastapi pytest
     - name: Test without coverage
       run: pytest tests
