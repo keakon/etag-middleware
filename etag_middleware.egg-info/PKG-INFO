@@ -1,0 +1,66 @@
+Metadata-Version: 2.1
+Name: etag-middleware
+Version: 0.1.0
+Summary: A middleware to handle ETag for Starletter or FastAPI
+Author-email: keakon <keakon@gmail.com>
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python
+Classifier: Topic :: Internet
+Classifier: Topic :: Software Development :: Libraries :: Application Frameworks
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Software Development
+Classifier: Typing :: Typed
+Classifier: Environment :: Web Environment
+Classifier: Framework :: FastAPI
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Internet :: WWW/HTTP :: HTTP Servers
+Classifier: Topic :: Internet :: WWW/HTTP
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+
+# ETag Middleware
+
+A middleware to handle ETag for Starlette or FastAPI.
+
+# Usage
+
+## FastAPI
+
+```python
+from etag import ETagMiddleware
+from fastapi import FastAPI
+from fastapi.middleware import Middleware
+
+app = FastAPI(middleware=[Middleware(ETagMiddleware)])
+```
+
+## Starlette
+
+```python
+from etag import ETagMiddleware
+from starlette.applications import Starlette
+from starlette.middleware import Middleware
+
+app = Starlette(middleware=[Middleware(ETagMiddleware)])
+```
+
+# Notice
+
+1. It won't compute `ETag` for requests with body size less than 80 bytes by default. Beacause `ETag` and `If-None-Match` increase more than 70 bytes to the response header, and computing `ETag` consumes CPU. You can adjust it by setting `minimum_size`:
+    ```python
+    app = FastAPI(middleware=[Middleware(ETagMiddleware, minimum_size=0)])
+    ```
+
+2. It won't compute `ETag` for `StreamingResponse` by default. Because it will delay sending the response until collected all its body and consumes more memory. You can enable it by setting `streaming=True`:
+    ```python
+    app = FastAPI(middleware=[Middleware(ETagMiddleware, streaming=True)])
+    ```

@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+
+[tool.setuptools]
+include-package-data = false
+
+[tool.setuptools.dynamic]
+version = {attr = "etag.__version__"}
+
+[tool.setuptools.packages.find]
+include = ["etag"]
+exclude = ["*.md", "tests/*"]
+
+[project]
+name = "etag-middleware"
+dynamic = ["version"]
+description = "A middleware to handle ETag for Starletter or FastAPI."
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [
+    { name = "keakon", email = "keakon@gmail.com" },
+]
+classifiers = [
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python",
+    "Topic :: Internet",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development",
+    "Typing :: Typed",
+    "Environment :: Web Environment",
+    "Framework :: FastAPI",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Internet :: WWW/HTTP :: HTTP Servers",
+    "Topic :: Internet :: WWW/HTTP",
+]
