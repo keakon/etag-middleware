@@ -5,6 +5,12 @@
 
 A middleware to handle ETag for Starlette or FastAPI.
 
+# Installation
+
+```bash
+pip install etag-middleware
+```
+
 # Usage
 
 ## FastAPI
