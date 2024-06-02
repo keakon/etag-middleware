@@ -40,7 +40,6 @@ app = Starlette(middleware=[Middleware(ETagMiddleware)])
     app = FastAPI(middleware=[Middleware(ETagMiddleware, minimum_size=0)])
     ```
 
-2. It won't compute `ETag` for `StreamingResponse` by default. Because it will delay sending the response until collected all its body and consumes more memory. You can enable it by setting `streaming=True`:
-    ```python
-    app = FastAPI(middleware=[Middleware(ETagMiddleware, streaming=True)])
-    ```
+2. It won't compute `ETag` for `StreamingResponse`. Because it will delay sending the response until collected all its body and consumes more memory.
+
+3. It compares `ETag` with `If-None-Match` for `FileResponse`.
